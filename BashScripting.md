@@ -23,6 +23,7 @@ description: A how-to for bash scripting to help automate processes in Linux.
 
 {% hint style="info" %}
 This is always the first line. It tells the kernel to use the Bash interpreter to run the file - readable even with the comment sign (#).
+You don't need to write this if you specify the interpreter to use in the shell.
 {% endhint %}
 
 * Variables:
@@ -53,7 +54,7 @@ Prints information to the console whilst the script is running. The use of the (
 </strong>
 read -sp "Enter hidden user input: " pass
 
-
+# The -p switch means "prompt" and outputs a string to the user to which the user replies. Their reply is stored in the varaible specified at the end. 
 # The -s switch hides the input from being seen on the screen.
 # In the script, use the variables as $ip or $pass, for example.
 </code></pre>
