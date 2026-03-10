@@ -127,12 +127,13 @@ The passing of $1 here signifies that whatever value was assigned to the $1 vari
 result=$(whoami)
 ip=$(hostname -I)
 echo "Running as: $result"
+```
 
+```bash
 # Could also do
 echo "[+] Running as $(whoami)"
 
 # $ sign tells bash to interpret the argument as a command in a subshell and pass it into the string
-
 ```
 
 {% hint style="info" %}
