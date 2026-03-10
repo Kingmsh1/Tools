@@ -156,9 +156,10 @@ $# # number of arguments
 * Store results to file:
 
 ```bash
-nmap 192.168.0.1 > results.txt # > saves to the file and suppresses code output to console
-nmap 192.168.0.1 >> results.txt # >> appends to the file and doesn't suppress code output to console
-nmap 192.168.0.1 2> /dev/null # suppress errors 
+nmap 192.168.0.1 > results.txt # > saves to the file and suppresses code output to console. This overwrites contents of the file
+nmap 192.168.0.1 >> results.txt # >> appends to the file (doesn't overwrite) and also suppresses code output to console
+nmap 192.168.0.1 2> /dev/null # suppress errors by sending to a "black hole" file. Anything sent to it is discarded
+nmap 192.168.0.1 &> /dev/null # suppresses errors and output 
 ```
 
 * String tricks:
@@ -169,8 +170,12 @@ echo "hello" | tr 'a-z' 'A-Z'
 # | is a pipe. It takes the output of the LHS command and feeds it as input to the RHS command.
 # tr - translate/replace characters. The output for above would be HELLO.
 
+echo "hellooo world    test" | tr -s ' '
+# If there are consecutive, same characters, -s collapses them into just one of them.
+# Output: hello world test (reduces multiple spaces to one).
+
 echo "192.168.0.1" | cut -d'.' -f1 
-# Outputs 192
+# Outputs 192. This can be assigned to a variable if needed using var1 = $()
 # -d specifies the delimiter (what to split on).
 # -f specifies the field(s) to grab. Numbered from 1 onwards. This is saying keep the first field (i.e., the part before the first ".").
 # This is basically saying cut the string at the decimal points and set each component to the fields.
@@ -184,7 +189,7 @@ grep -r "password" /var/www/
 # -r means search recursively through a directory.
 # It looks for the word "password" in every file inside the specified directory recursively.
 
-sed 's/old/new/g' file.txt
+sed 's/old_text/new_text/g' file.txt
 # sed is used to find and replace in strings.
 # This command replaces all occurrences.
 # 's' means substitute and the 'g' means global - replace all occurrences not just the first.
